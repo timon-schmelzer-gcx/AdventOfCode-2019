@@ -1,0 +1,6 @@
+name: aoc
+
+dependencies:
+    - python=3.7
+    - pandas
+    - flake8
