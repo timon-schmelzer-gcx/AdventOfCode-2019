@@ -3,7 +3,7 @@ from math import floor
 
 def calculate_fuel(module_mass):
     required_fuel = floor(module_mass / 3) - 2
-    return required_fuel if required_fuel > 0 else 0
+    return max(required_fuel, 0)
 
 
 def calculate_fuel_recursive(module_mass):
