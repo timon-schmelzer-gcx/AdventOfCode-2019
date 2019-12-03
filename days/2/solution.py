@@ -39,7 +39,7 @@ def apply_operations(intcode):
 
 
 def test_apply_operations():
-    examples_and_solution = [
+    examples_and_solutions = [
         [[1, 0, 0, 0, 99], [2, 0, 0, 0, 99]],
         [[2, 3, 0, 3, 99], [2, 3, 0, 6, 99]],
         [[2, 4, 4, 5, 99, 0], [2, 4, 4, 5, 99, 9801]],
@@ -49,7 +49,7 @@ def test_apply_operations():
             [3500, 9, 10, 70, 2, 3, 11, 0, 99, 30, 40, 50]
         ]
     ]
-    for example, solution in examples_and_solution:
+    for example, solution in examples_and_solutions:
         assert(apply_operations(example) == solution)
 
 
