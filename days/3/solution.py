@@ -1,6 +1,3 @@
-import operator
-
-
 class Point:
     def __init__(self, x, y, step):
         self.x = x
