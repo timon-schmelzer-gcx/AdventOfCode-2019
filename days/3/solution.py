@@ -1,3 +1,6 @@
+import operator
+
+
 class Point:
     def __init__(self, x, y, step):
         self.x = x
@@ -15,6 +18,13 @@ class Point:
     def __repr__(self):
         return f'Point(x={self.x}, y={self.y}, step={self.step})'
 
+    def __lt__(self, other):
+        if self.x == other.x and self.y == other.y:
+            return self.step < other.step
+        if self.x == other.x:
+            return self.y < other.y
+        return self.x < other.x
+
 
 def read_input(path='data.txt'):
     with open(path, 'r') as infile:
@@ -23,6 +33,28 @@ def read_input(path='data.txt'):
         wirepath.replace('\n', '').split(',') for wirepath in wirepaths
     ]
     return wirepaths
+
+
+def sort_points(point_one, point_two):
+    if point_one.x > point_two.x:
+        return point_one
+    if point_one.x < point_two.x:
+        return point_two
+
+    # Now, x are equal
+    if point_one.y > point_two.y:
+        return point_one
+    if point_one.y < point_two.y:
+        return point_two
+
+    # Now, x and y are equal
+    if point_one.step > point_two.step:
+        return point_one
+    if point_one.step < point_two.step:
+        return point_two
+
+    # Now, everything is equal
+    return point_one
 
 
 def walk_single_step(cur_point, direction):
@@ -93,6 +125,12 @@ def find_interceptions_fast(positions_one, positions_two):
 def find_interceptions_and_return_both_fast(positions_one, positions_two):
     interceptions_one = list(set(positions_one).intersection(positions_two))
     interceptions_two = list(set(positions_two).intersection(positions_one))
+
+    # WARNING: Not sorting the interception lists will cause
+    # arbitrary behaviour! You can test it by commenting out
+    # one of the next two lines and runing the script multiple times.
+    interceptions_one = sorted(interceptions_one)
+    interceptions_two = sorted(interceptions_two)
 
     return [
         point_pair for point_pair in zip(
@@ -188,5 +226,6 @@ if __name__ == "__main__":
     test_solve_part_two()
 
     wirepath_one, wirepath_two = read_input()
+
     print('Solution part 1:', solve(wirepath_one, wirepath_two, part=1))
     print('Solution part 2:', solve(wirepath_one, wirepath_two, part=2))
