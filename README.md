@@ -7,3 +7,9 @@ To install the required dependencies, install [miniconda](https://docs.conda.io/
 conda env create -f environment.yml
 conda activate aoc
 ```
+
+Run this bash script to recalculate the solution for all days:
+
+```
+for DAY in `ls days`; do echo "Day $DAY: " && cd days/$DAY && python solution.py && cd ../../; done
+```
