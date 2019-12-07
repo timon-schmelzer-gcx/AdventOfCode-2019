@@ -69,7 +69,7 @@ class Universe:
         return steps_you + steps_san
 
 
-def read_input(path='data.txt'):
+def read_input(path='days/6/data.txt'):
     with open(path, 'r') as infile:
         planet_map = infile.read()
     planet_map = planet_map.split()

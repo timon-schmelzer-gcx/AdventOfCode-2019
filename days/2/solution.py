@@ -6,7 +6,7 @@ OPERATIONS = {
 }
 
 
-def read_input(path='data.txt'):
+def read_input(path='days/2/data.txt'):
     with open(path, 'r') as infile:
         intcode = infile.read()
     intcode = intcode.split(',')

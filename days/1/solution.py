@@ -37,7 +37,7 @@ if __name__ == '__main__':
     total_fuel = 0
     total_fuel_recursive = 0
 
-    with open('data.txt', 'r') as infile:
+    with open('days/1/data.txt', 'r') as infile:
         for line in infile.readlines():
             module_mass = int(line)
             total_fuel += calculate_fuel(module_mass)

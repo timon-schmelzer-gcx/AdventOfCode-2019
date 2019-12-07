@@ -23,7 +23,7 @@ class Point:
         return self.x < other.x
 
 
-def read_input(path='data.txt'):
+def read_input(path='days/3/data.txt'):
     with open(path, 'r') as infile:
         wirepaths = infile.readlines()
     wirepaths = [
