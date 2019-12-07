@@ -8,10 +8,15 @@ class Computer():
         2: mul
     }
 
-    def __init__(self, intcode, first_input=None):
+    def __init__(
+        self, intcode, lazy_input=None, no_zero_output=False,
+            output_string='Output: {}'):
         self.intcode = intcode
         self.cur_index = 0
         self.finished = False
+        self.lazy_input = lazy_input
+        self.no_zero_output = no_zero_output
+        self.output_string = output_string
 
     def operate(self):
         while(not self.finished):
@@ -65,10 +70,13 @@ class Computer():
                 self.cur_index += 4
 
             elif str(instruction).endswith('3'):
-                value = int(input(
-                    'Input (Hint: Type 1 for part 1 solution and 5 for part '
-                    '2. Ignore zeros for the first part): '
-                ))
+                if self.lazy_input:
+                    value = self.lazy_input
+                else:
+                    value = int(input(
+                        'Input (Hint: Type 1 for part 1 solution and 5 for '
+                        'part 2. Ignore zeros for the first part): '
+                    ))
                 instruction_zfilled = str(instruction).zfill(3)
 
                 if instruction_zfilled[0] == '0':
@@ -92,7 +100,8 @@ class Computer():
                     raise NotImplementedError(
                         f'Instruction not implemented, {instruction}'
                     )
-                print('Output:', value)
+                if not(value == 0 and self.no_zero_output):
+                    print(self.output_string.format(value))
                 self.cur_index += 2
 
             elif str(instruction).endswith('5') or \
@@ -236,5 +245,22 @@ if __name__ == '__main__':
 
     intcode = read_input()
 
-    computer = Computer(intcode)
+    # Part 1
+    computer = Computer(
+        intcode[:],
+        # Additional flags for same output as the other days
+        lazy_input=2,
+        no_zero_output=True,
+        output_string='Solution part 1: {}'
+    )
+    computer.operate()
+
+    # Part 2
+    computer = Computer(
+        intcode[:],
+        # Additional flags for same output as the other days
+        lazy_input=5,
+        no_zero_output=True,
+        output_string='Solution part 2: {}'
+    )
     computer.operate()
