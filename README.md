@@ -1,15 +1,10 @@
 My AdventOfCode Solutions (2019)
 ================================
 
-To install the required dependencies, install [miniconda](https://docs.conda.io/en/latest/miniconda.html) and execute:
+All solutions just require a recent python version (3.7).
+
+To run the tests and re-calculate all results, you can use the `run.sh` provided:
 
 ```
-conda env create -f environment.yml
-conda activate aoc
-```
-
-Run this bash script to recalculate the solution for all days:
-
-```
-for DAY in `ls days`; do echo "Day $DAY: " && cd days/$DAY && python solution.py && cd ../../; done
+    ./run.sh
 ```
